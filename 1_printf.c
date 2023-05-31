@@ -9,9 +9,10 @@
 */
 int _printf(const char *format, ...)
 {
-int d;
-int i;
-
+int d_i;
+int buff_len;
+char buff[12];
+int nc_count = 0;
 va_list args;
 va_start(args, format);
 
@@ -23,25 +24,22 @@ format++;
 switch (*format)
 {
 case 'd':
-d = va_arg(args, int);
-write(1, &d, sizeof(int));
-break;
-case 'i':
-i = va_arg(args, int);
-write(1, &i, sizeof(int));
+d_i = va_arg(args, int);
+buff_len = sprintf(buff, "%d", d_i);
+nc_count += write(1, buff, buff_len);
 break;
 default:
 write(1, "%", 1);
 write(1, format, 1);
+nc_count+=2;
 break;
 }
 }
 else
 {
-write(1, format, 1);
+nc_count+=write(1, format, 1);
 }
 }
 va_end(args);
 return (0);
 }
-
