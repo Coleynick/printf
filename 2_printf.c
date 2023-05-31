@@ -13,7 +13,7 @@ int _printf(const char *format, ...)
 {
 va_list num;
 va_start(num, format);
-for (; *format != '\0', format++)
+for (; *format != '\0'; format++)
 {
 if (*format == '%')
 {
