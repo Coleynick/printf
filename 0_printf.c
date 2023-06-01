@@ -47,6 +47,19 @@ write(1, "%", 1);
 }
 
 /**
+ * handleint -Handles the "d & i" conversion specifier
+ * @nc_count: Pointer to the count variable
+ * @args: The va_list variable contains the arguments
+ * Return: None
+ */
+void handleint(va_list args, int *nc_count)
+{
+int d_i = va_arg (args, int);
+char buff[12]; 
+int buff_len = sprintf(buff, "%d", d_i);
+write(1, buff, buff_len);
+(*nc_count)++;
+/**
 * _printf - This function follows a format to produce output
 * @format: The format string
 * Return: Number of characters printed
@@ -73,6 +86,10 @@ handlestr(args, &nc_count);
 break;
 case '%':
 handleperc(&nc_count);
+break;
+case 'd':
+case 'i':
+handleint(args, &nc_count);
 break;
 default:
 write(1, "%", 1);
