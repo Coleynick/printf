@@ -74,14 +74,16 @@ case '%':
 handleperc(&nc_count);
 break;
 default:
-nc_count += write(1, "%", 1);
-nc_count += write(1, format, 1);
+write(1, "%", 1);
+write(1, format, 1);
+nc_count += 2;
 break;
 }
 }
 else
 {
-nc_count += write(1, format, 1);
+write(1, format, 1);
+nc_count++;
 }
 format++;
 }
