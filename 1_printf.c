@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include "main.h"
 #include <unistd.h>
+#include <stdlib.h>
 /**
 * _printf - This function follows a format to produce output
 * @format: The format string
@@ -11,7 +12,7 @@ int _printf(const char *format, ...)
 {
 int d_i;
 int buff_len;
-char buff[12];
+char *buff;
 int nc_count = 0;
 va_list args;
 va_start(args, format);
@@ -24,10 +25,22 @@ format++;
 switch (*format)
 {
 case 'd':
+case 'i':
+{
 d_i = va_arg(args, int);
-buff_len = sprintf(buff, "%d", d_i);
+buff_len = snprintf(NULL, 0, "%d", d_i);
 nc_count += write(1, buff, buff_len);
+buff = malloc((buff_len + 1) * sizeof(char));
+if (buff == NULL)
+{
+va_end(args);
+return (-1); 
+}
+sprintf(buff, "%d", d_i);
+nc_count+=write(1, buff, buff_len);
+free(buff);
 break;
+}
 default:
 write(1, "%", 1);
 write(1, format, 1);
@@ -41,5 +54,5 @@ nc_count+=write(1, format, 1);
 }
 }
 va_end(args);
-return (0);
+return (nc_count);
 }
