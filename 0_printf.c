@@ -47,19 +47,6 @@ write(1, "%", 1);
 }
 
 /**
- * handleint -Handles the "d & i" conversion specifier
- * @nc_count: Pointer to the count variable
- * @args: The va_list variable contains the arguments
- * Return: None
- */
-void handleint(va_list args, int *nc_count)
-{
-int d_i = va_arg (args, int);
-char buff[12]; 
-int buff_len = sprintf(buff, "%d", d_i);
-write(1, buff, buff_len);
-(*nc_count)++;
-/**
 * _printf - This function follows a format to produce output
 * @format: The format string
 * Return: Number of characters printed
@@ -70,7 +57,6 @@ int _printf(const char *format, ...)
 int nc_count = 0;
 va_list args;
 va_start(args, format);
-
 while (*format != '\0')
 {
 if (*format == '%')
@@ -87,21 +73,15 @@ break;
 case '%':
 handleperc(&nc_count);
 break;
-case 'd':
-case 'i':
-handleint(args, &nc_count);
-break;
 default:
-write(1, "%", 1);
-write(1, format, 1);
-nc_count += 2;
+nc_count += write(1, "%", 1);
+nc_count += write(1, format, 1);
 break;
 }
 }
 else
 {
-write(1, format, 1);
-nc_count++;
+nc_count += write(1, format, 1);
 }
 format++;
 }
