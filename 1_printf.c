@@ -21,12 +21,11 @@ buff = malloc((buff_len + 1) * sizeof(char));
 if (buff == NULL)
 {
 va_end(args);
-return (-1);
+return;
 }
-sprintf(buff, "%d", d_i);
-nc_count += write(1, buff, buff_len);
+snprintf(buff, buff_len + 1, "%d", d_i);
+*nc_count += write(1, buff, buff_len);
 free(buff);
-break;
 }
 
 /**
@@ -36,6 +35,8 @@ break;
 */
 int _printf(const char *format, ...)
 {
+if (format == NULL)
+return (-1);
 int nc_count = 0;
 va_list args;
 va_start(args, format);
