@@ -13,6 +13,7 @@
 
 #define S_LONG 2
 #define S_SHORT 1
+int _printf(const char *format, ...);
 /**
 * struct fmt - Struct operation
 * @fmt: The format.
