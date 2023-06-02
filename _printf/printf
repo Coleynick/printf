@@ -2,6 +2,7 @@
 #define MAIN_H
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <stdarg.h>
 #include <stdio.h>
 #include <unistd.h>
@@ -97,6 +98,11 @@ long int convert_size_unsgnd(unsigned long int num, int size);
 int _printf(const char *format, ...);
 
 >>>>>>> parent of 8897579 (zero)
+=======
+
+int _printf(const char *format, ...);
+
+>>>>>>> parent of fc104d2 (Producing output based on a format)
 =======
 
 int _printf(const char *format, ...);
