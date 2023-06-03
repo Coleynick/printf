@@ -2,6 +2,6 @@
 #define MAIN_H
 
 int _printf(const char *format, ...);
-void handleInt(va_list args, int *nc_count);
+int _print_integer(int num);
 
 #endif
